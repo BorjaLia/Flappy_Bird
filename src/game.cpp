@@ -8,19 +8,29 @@
 
 namespace game
 {
+	bool isMultiplayer = true;
+
 	screen::Type nextScreen;
 
-	bird::Bird bird;
+	bird::Bird bird1;
+	bird::Bird bird2;
 	obstacle::Obstacle obstacle;
 
-	static void updateBird();
+	static void updateBird(bird::Bird& bird,int jumpKey);
 	static void updateObstacle();
 
-	void init()
+	void init(bool multiplayer)
 	{
+		isMultiplayer = multiplayer;
+
 		nextScreen = screen::Type::Game;
 
-		bird = bird::init();
+		bird1 = bird::init();
+		if (isMultiplayer){
+			bird2 = bird::init();
+			bird1.collision.position.x -= 5;
+			bird2.collision.position.x += 5;
+		}
 		obstacle = obstacle::init();
 
 		background::init();
@@ -28,7 +38,14 @@ namespace game
 
 	screen::Type update()
 	{
-		updateBird();
+		if (IsKeyPressed(KEY_ESCAPE))
+		{
+			nextScreen = screen::Type::Menu;
+		}
+		updateBird(bird1,KEY_W);
+		if (isMultiplayer) {
+			updateBird(bird2,KEY_UP);
+		}
 		updateObstacle();
 		background::update();
 
@@ -38,26 +55,30 @@ namespace game
 	void draw()
 	{
 		background::draw();
-		bird::draw(bird);
+		bird::draw(bird1, WHITE);
+		if (isMultiplayer) {
+			bird::draw(bird2,GRAY);
+		}
 		obstacle::draw(obstacle);
 	}
 
-	static void updateBird()
+	static void updateBird(bird::Bird& bird, int jumpKey)
 	{
-		if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_SPACE) || IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		if (IsKeyPressed(jumpKey)) {
 			bird::jump(bird);
+		}
 
-		if (IsKeyPressed(KEY_ESCAPE))
-			nextScreen = screen::Type::Menu;
+		if (coll::rectRect(bird.collision, obstacle.topCollision) || coll::rectRect(bird.collision, obstacle.bottomCollision)) {
+			init(isMultiplayer);
+		}
 
-		if (coll::rectRect(bird.collision, obstacle.topCollision) || coll::rectRect(bird.collision, obstacle.bottomCollision))
-			init();
-
-		if (coll::rectRoof(bird.collision, 0))
+		if (coll::rectRoof(bird.collision, 0)) {
 			bird::bumpRoof(bird);
+		}
 
-		if(coll::rectFloor(bird.collision, config::gamespace.y))
-			init();
+		if (coll::rectFloor(bird.collision, config::gamespace.y)) {
+			init(isMultiplayer);
+		}
 
 		bird::move(bird);
 	}
@@ -66,6 +87,8 @@ namespace game
 	{
 		obstacle::move(obstacle);
 		if (obstacle.topCollision.position.x + obstacle.topCollision.size.x / 2 < 0)
+		{
 			obstacle::resetPosition(obstacle);
+		}
 	}
 }

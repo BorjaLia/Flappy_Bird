@@ -4,6 +4,6 @@
 namespace menu
 {
 	void init();
-	screen::Type update();
+	screen::Type update(bool& multiplayer);
 	void draw();
 }

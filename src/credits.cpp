@@ -12,7 +12,8 @@ namespace credits
 	{
 		Title,
 		ProgTitle,
-		ProgName,
+		ProgName1,
+		ProgName2,
 		Last,
 	};
 	const int maxLabels = static_cast<int>(Labels::Last);
@@ -36,10 +37,13 @@ namespace credits
 
 		shape.size = { 7, 7 };
 		shape.position = { 10, 30 };
-		labels[static_cast<int>(Labels::ProgTitle)] = label::init("Programmer", shape, render::TextAlign::Left, WHITE);
+		labels[static_cast<int>(Labels::ProgTitle)] = label::init("Programmers", shape, render::TextAlign::Left, WHITE);
 
 		shape.position.x = config::gamespace.x - 10;
-		labels[static_cast<int>(Labels::ProgName)] = label::init("Santino Verrua", shape, render::TextAlign::Right, WHITE);
+		labels[static_cast<int>(Labels::ProgName1)] = label::init("Santino Verrua", shape, render::TextAlign::Right, WHITE);
+
+		shape.position.y += 10;
+		labels[static_cast<int>(Labels::ProgName2)] = label::init("Borja Lia", shape, render::TextAlign::Right, WHITE);
 	}
 
 	screen::Type update()

@@ -53,12 +53,15 @@ namespace button
 
 	void draw(Button button)
 	{
-		if (button.isPressed)
+		if (button.isPressed) {
 			render::rectangle(button.shape, RED);
-		else if (button.isSelected)
+		}
+		else if (button.isSelected) {
 			render::rectangle(button.shape, GRAY);
-		else
+		}
+		else {
 			render::rectangle(button.shape, WHITE);
+		}
 		render::text(button.label, button.shape.position, button.shape.size.y, BLACK);
 	}
 }

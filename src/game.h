@@ -3,7 +3,7 @@
 
 namespace game
 {
-	void init();
+	void init(bool multiplayer);
 	screen::Type update();
 	void draw();
 }

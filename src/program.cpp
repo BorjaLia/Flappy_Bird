@@ -16,6 +16,8 @@ namespace program
 	static void draw();
 	static void close();
 
+	bool multiplayer = false;
+
 	screen::Type currentScreen = screen::Type::Null;
 	screen::Type previousScreen = screen::Type::Null;
 		
@@ -46,7 +48,7 @@ namespace program
 		switch (currentScreen)
 		{
 		case screen::Type::Menu:
-			currentScreen = menu::update();
+			currentScreen = menu::update(multiplayer);
 			break;
 		case screen::Type::Game:
 			currentScreen = game::update();
@@ -56,10 +58,10 @@ namespace program
 			break;
 		}
 
-		if (currentScreen != previousScreen)
+		if (currentScreen != previousScreen) {
 			changeScreen();
+		}
 	}
-
 
 	static void changeScreen()
 	{
@@ -69,7 +71,7 @@ namespace program
 			menu::init();
 			break;
 		case screen::Type::Game:
-			game::init();
+			game::init(multiplayer);
 			break;
 		case screen::Type::Credits:
 			credits::init();
@@ -97,7 +99,6 @@ namespace program
 			break;
 		}
 
-
 		EndDrawing();
 	}
 
@@ -105,5 +106,4 @@ namespace program
 	{
 		render::closeWindow();
 	}
-
 }

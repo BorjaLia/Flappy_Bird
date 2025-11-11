@@ -39,9 +39,9 @@ namespace bird
 		bird.direction = 0;
 	}
 
-	void draw(Bird bird)
+	void draw(Bird bird, Color color)
 	{
-		render::rectangle(bird.collision, WHITE);
+		render::rectangle(bird.collision, color);
 	}
 
 	static void fall(Bird& bird)
