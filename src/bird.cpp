@@ -10,7 +10,7 @@ namespace bird
 	const float jumpStrength = 1.0f;
 	const float gravity = 3.0f;
 
-	Bird init()
+	Bird init(Texture2D texture)
 	{
 		Bird bird;
 		
@@ -18,6 +18,8 @@ namespace bird
 		bird.collision.size = { 8, 8 };
 		bird.direction = 0.0f;
 		bird.speed = 100;
+
+		bird.texture = texture;
 
 		return bird;
 	}
@@ -42,6 +44,10 @@ namespace bird
 	void draw(Bird bird, Color color)
 	{
 		render::rectangle(bird.collision, color);
+		shape::Rectangle spriteRec = bird.collision;
+		spriteRec.size.x *= 3;
+		spriteRec.size.y *= 2;
+		render::sprite(bird.texture, spriteRec,0.0f);
 	}
 
 	static void fall(Bird& bird)

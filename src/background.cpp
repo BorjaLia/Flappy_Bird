@@ -5,12 +5,23 @@
 
 namespace background
 {
+	static Texture2D bgTexture;
+
 	static shape::Rectangle layer1;
+	static Texture2D layer1Sprite;
 	static shape::Rectangle layer2;
+	static Texture2D layer2Sprite;
 	static shape::Rectangle layer3;
+	static Texture2D layer3Sprite;
 
 	void init()
 	{
+		bgTexture = LoadTexture("res/sprites/background.png");
+
+		layer1Sprite = LoadTexture("res/sprites/background.png");
+		layer2Sprite = LoadTexture("res/sprites/background.png");
+		layer3Sprite = LoadTexture("res/sprites/background.png");
+
 		layer1.size = { 15, 70 };
 		layer1.position = { 100, config::gamespace.y - layer1.size.y / 2 };
 
@@ -39,6 +50,15 @@ namespace background
 
 	void draw()
 	{
+		shape::Rectangle bgRec;
+
+		bgRec.position.x = config::gamespace.x / 2;
+		bgRec.position.y = config::gamespace.y / 2;
+
+		bgRec.size = { 160,100 };
+
+		render::sprite(bgTexture,bgRec,0.0f);
+
 		render::rectangle(layer1, BLUE);
 		render::rectangle(layer2, YELLOW);
 		render::rectangle(layer3, GREEN);
