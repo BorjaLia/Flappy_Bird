@@ -4,6 +4,8 @@
 #include "button.h"
 #include "label.h"
 
+#include "background.h"
+
 namespace menu
 {
 	screen::Type nextScreen;
@@ -18,6 +20,8 @@ namespace menu
 	};
 	const int maxButtons = static_cast<int>(Options::Last);
 
+	Sound menuMusic;
+
 	button::Button buttons[maxButtons];
 
 	label::Label versionLabel;
@@ -25,6 +29,8 @@ namespace menu
 	void init()
 	{
 		nextScreen = screen::Type::Menu;
+
+		menuMusic = LoadSound("res/audio/menuMusic.wav");
 
 		shape::Rectangle shape;
 		shape.position = { config::gamespace.x / 2, config::gamespace.y / 2 };
@@ -42,7 +48,9 @@ namespace menu
 
 		buttons[static_cast<int>(Options::Exit)] = button::init(shape, "Exit");
 
-		versionLabel = label::init("version 0.4", { {5, 95},{5, 5} }, render::TextAlign::Left, WHITE);
+		versionLabel = label::init("version 1.0", { {5, 95},{5, 5} }, render::TextAlign::Left, WHITE);
+	
+		background::init();
 	}
 
 	screen::Type update(bool& multiplayer)
@@ -55,10 +63,12 @@ namespace menu
 		}
 		if (button::update(buttons[static_cast<int>(Options::Singleplayer)])) {
 			nextScreen = screen::Type::Game;
+			StopSound(menuMusic);
 			multiplayer = false;
 		}
 		if (button::update(buttons[static_cast<int>(Options::Multiplayer)])) {
 			nextScreen = screen::Type::Game;
+			StopSound(menuMusic);
 			multiplayer = true;
 		}
 		if (button::update(buttons[static_cast<int>(Options::Credits)])) {
@@ -68,16 +78,24 @@ namespace menu
 			nextScreen = screen::Type::Null;
 		}
 
+		background::update();
+
 		return nextScreen;
 	}
 
 	void draw()
 	{
+		background::draw();
+
 		for (int i = 0; i < maxButtons; i++)
 		{
 			button::draw(buttons[i]);
 		}
 
 		label::draw(versionLabel);
+
+		if (!IsSoundPlaying(menuMusic)) {
+			PlaySound(menuMusic);
+		}
 	}
 }

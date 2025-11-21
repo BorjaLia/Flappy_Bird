@@ -25,4 +25,6 @@ namespace render
 	//void oneshot(anim::Animation& animation, shape::Rectangle rectangle, float rotation);
 	void text(std::string text, Vector2 position, float size, Color color);
 	void text(std::string text, Vector2 position, Vector2 size, Color color, TextAlign align);
+
+	void sound(Sound sound);
 }

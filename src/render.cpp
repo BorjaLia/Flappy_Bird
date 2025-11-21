@@ -18,6 +18,7 @@ namespace render
 	{
 		InitWindow(static_cast<int>(config::res.x), static_cast<int>(config::res.y), "Flappy Bird");
 		setGamespaceFromRes();
+		InitAudioDevice();
 	}
 
 	void closeWindow()
@@ -135,24 +136,10 @@ namespace render
 		DrawText(text.c_str(), static_cast<int>(textPosition.x), static_cast<int>(textPosition.y), static_cast<int>(size.y), color);
 	}
 
-	/*
-	void animation(anim::Animation& animation, shape::Rectangle rectangle, float rotation)
+	void sound(Sound sound)
 	{
-		if(animation.length > 0)
-			sprite(animation.frames[currentFrame % animation.length], rectangle, rotation);
-		
+		PlaySound(sound);
 	}
-
-	void oneshot(anim::Animation& animation, shape::Rectangle rectangle, float rotation)
-	{
-		if (animation.currentFrame < animation.length)
-		{
-			sprite(animation.frames[animation.currentFrame], rectangle, rotation);
-			if (updatedThisFrame)
-				animation.currentFrame++;
-		}
-	}
-	*/
 
 	static void setGamespaceFromRes()
 	{
