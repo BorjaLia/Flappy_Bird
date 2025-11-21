@@ -22,7 +22,7 @@ namespace background
 		layer2Sprite = LoadTexture("res/sprites/two.png");
 		layer3Sprite = LoadTexture("res/sprites/three.png");
 
-		layer1.size = { 100,100  };
+		layer1.size = { 320,180  };
 		layer1.position = { 100, config::gamespace.y - layer1.size.y / 2 };
 
 		layer2.size = { 70, 70 };

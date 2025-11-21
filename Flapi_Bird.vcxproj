@@ -171,7 +171,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\libs\x64;$(SolutionDir)lib\BorjaLib\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>BorjaLib.lib;winmm.lib;raylib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PreBuildEvent>
@@ -179,7 +179,8 @@
       </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>"$(SolutionDir)scripts\copyres.bat"</Command>
+      <Command>"$(SolutionDir)scripts\copyres.bat" "$(SolutionDir)" "$(SolutionDir)bin\x64\Release"
+"$(SolutionDir)scripts\copyres.bat" "$(SolutionDir)" "$(SolutionDir)bin\x64\Debug"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
