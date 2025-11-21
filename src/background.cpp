@@ -18,9 +18,9 @@ namespace background
 	{
 		bgTexture = LoadTexture("res/sprites/background.png");
 
-		layer1Sprite = LoadTexture("res/sprites/background.png");
-		layer2Sprite = LoadTexture("res/sprites/background.png");
-		layer3Sprite = LoadTexture("res/sprites/background.png");
+		layer1Sprite = LoadTexture("res/sprites/one.png");
+		layer2Sprite = LoadTexture("res/sprites/two.png");
+		layer3Sprite = LoadTexture("res/sprites/three.png");
 
 		layer1.size = { 15, 70 };
 		layer1.position = { 100, config::gamespace.y - layer1.size.y / 2 };
@@ -59,8 +59,12 @@ namespace background
 
 		render::sprite(bgTexture,bgRec,0.0f);
 
-		render::rectangle(layer1, BLUE);
-		render::rectangle(layer2, YELLOW);
-		render::rectangle(layer3, GREEN);
+		//render::rectangle(layer1, BLUE);
+		//render::rectangle(layer2, YELLOW);
+		//render::rectangle(layer3, GREEN);
+		
+		render::sprite(layer1Sprite,layer1,0.0f);
+		render::sprite(layer2Sprite,layer2,0.0f);
+		render::sprite(layer3Sprite,layer3,0.0f);
 	}
 }

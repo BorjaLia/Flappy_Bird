@@ -11,9 +11,11 @@ namespace obstacle
 	const int speed = 50;
 	const int spaceToPass = 30;
 
-	Obstacle init()
+	Obstacle init(Texture2D texture)
 	{
 		Obstacle obstacle;
+
+		obstacle.texture = texture;
 
 		obstacle.position = { config::gamespace.x + 5, config::gamespace.y / 2 };
 
@@ -50,7 +52,9 @@ namespace obstacle
 
 	void draw(Obstacle obstacle)
 	{
-		render::rectangle(obstacle.topCollision, RED);
-		render::rectangle(obstacle.bottomCollision, RED);
+		//render::rectangle(obstacle.bottomCollision, RED);
+		//render::rectangle(obstacle.topCollision, RED);
+		render::sprite(obstacle.texture,obstacle.topCollision,0.0f);
+		render::sprite(obstacle.texture,obstacle.bottomCollision,180.0f);
 	}
 }

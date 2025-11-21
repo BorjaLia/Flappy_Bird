@@ -6,11 +6,12 @@ namespace obstacle
 	struct Obstacle
 	{
 		Vector2 position;
+		Texture2D texture;
 		shape::Rectangle topCollision;
 		shape::Rectangle bottomCollision;
 	};
 
-	Obstacle init();
+	Obstacle init(Texture2D texture);
 
 	void move(Obstacle& obstacle);
 	void resetPosition(Obstacle& obstacle);

@@ -18,5 +18,5 @@ namespace bird
 	void jump(Bird& bird);
 	void bumpRoof(Bird& bird);
 
-	void draw(Bird bird, Color color);
+	void draw(Bird bird);
 }

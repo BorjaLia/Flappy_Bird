@@ -31,6 +31,7 @@ namespace game
 	int score = 0;
 
 	Texture2D birdTexture;
+	Texture2D obstacleTexture;
 
 	bird::Bird bird1;
 	bird::Bird bird2;
@@ -69,7 +70,10 @@ namespace game
 			bird1.collision.position.x -= 5;
 			bird2.collision.position.x += 5;
 		}
-		obstacle = obstacle::init();
+
+		obstacleTexture = LoadTexture("res/sprites/fire2.png");
+
+		obstacle = obstacle::init(obstacleTexture);
 
 		background::init();
 	}
@@ -107,9 +111,9 @@ namespace game
 	void draw()
 	{
 		background::draw();
-		bird::draw(bird1, WHITE);
+		bird::draw(bird1);
 		if (isMultiplayer) {
-			bird::draw(bird2,GRAY);
+			bird::draw(bird2);
 		}
 		obstacle::draw(obstacle);
 

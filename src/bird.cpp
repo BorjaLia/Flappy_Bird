@@ -41,9 +41,9 @@ namespace bird
 		bird.direction = 0;
 	}
 
-	void draw(Bird bird, Color color)
+	void draw(Bird bird)
 	{
-		render::rectangle(bird.collision, color);
+		//render::rectangle(bird.collision, color);
 		shape::Rectangle spriteRec = bird.collision;
 		spriteRec.size.x *= 3;
 		spriteRec.size.y *= 2;
