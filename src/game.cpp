@@ -110,7 +110,7 @@ namespace game
 			PlaySound(gameMusic);
 		}
 
-		if (IsKeyPressed(KEY_ESCAPE))
+		if (IsKeyPressed(KEY_ESCAPE) && !hasLost)
 		{
 			isPaused = !isPaused;
 		}
@@ -173,7 +173,6 @@ namespace game
 			DrawText(pausedText.c_str(), static_cast<int>(config::res.x) / 4, static_cast<int>(config::res.y) / 4, 125, WHITE);
 
 			button::draw(buttons[static_cast<int>(Options::Retry)]);
-
 		}
 
 		bird::sound(bird1);

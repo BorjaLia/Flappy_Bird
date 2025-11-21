@@ -22,13 +22,13 @@ namespace background
 		layer2Sprite = LoadTexture("res/sprites/two.png");
 		layer3Sprite = LoadTexture("res/sprites/three.png");
 
-		layer1.size = { 15, 70 };
+		layer1.size = { 100,100  };
 		layer1.position = { 100, config::gamespace.y - layer1.size.y / 2 };
 
-		layer2.size = { 20, 50 };
+		layer2.size = { 70, 70 };
 		layer2.position = { 100, config::gamespace.y - layer2.size.y / 2 };
 
-		layer3.size = { 25, 25 };
+		layer3.size = { 70,45 };
 		layer3.position = { 100, config::gamespace.y - layer3.size.y / 2 };
 
 	}
